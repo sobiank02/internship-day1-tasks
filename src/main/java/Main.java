@@ -50,10 +50,10 @@ public class Main {
 
 
             // =====================================
-            // 4. SELECT
+            // 4. GET ALL STUDENTS
             // =====================================
 
-            selectStudents(connection);
+            getAllStudents(connection);
 
 
             // =====================================
@@ -63,10 +63,9 @@ public class Main {
             updateStudent(connection);
 
 
-            // Show updated record
             System.out.println("\nAfter UPDATE:");
 
-            selectStudents(connection);
+            getAllStudents(connection);
 
 
             // =====================================
@@ -76,10 +75,9 @@ public class Main {
             deleteStudent(connection);
 
 
-            // Show final records
             System.out.println("\nAfter DELETE:");
 
-            selectStudents(connection);
+            getAllStudents(connection);
 
 
         } catch (ClassNotFoundException e) {
@@ -125,9 +123,8 @@ public class Main {
             throws SQLException {
 
         String sql =
-                "INSERT INTO students " +
-                "(id, name, email, dept_id) " +
-                "VALUES (?, ?, ?, ?)";
+                "INSERT INTO students (name, age) " +
+                "VALUES (?, ?)";
 
         PreparedStatement statement = null;
 
@@ -135,10 +132,8 @@ public class Main {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, 11);
-            statement.setString(2, "Rahul");
-            statement.setString(3, "rahul@gmail.com");
-            statement.setInt(4, 1);
+            statement.setString(1, "Sobia");
+            statement.setInt(2, 21);
 
             int rows = statement.executeUpdate();
 
@@ -148,9 +143,7 @@ public class Main {
 
         } finally {
 
-            // Close PreparedStatement
             if (statement != null) {
-
                 statement.close();
             }
         }
@@ -158,14 +151,14 @@ public class Main {
 
 
     // ==================================================
-    // SELECT STUDENTS
+    // GET ALL STUDENTS
     // ==================================================
 
-    public static void selectStudents(Connection connection)
+    public static void getAllStudents(Connection connection)
             throws SQLException {
 
         String sql =
-                "SELECT id, name, email, dept_id " +
+                "SELECT id, name, age " +
                 "FROM students " +
                 "ORDER BY id";
 
@@ -188,31 +181,23 @@ public class Main {
                 String name =
                         resultSet.getString("name");
 
-                String email =
-                        resultSet.getString("email");
-
-                int deptId =
-                        resultSet.getInt("dept_id");
+                int age =
+                        resultSet.getInt("age");
 
                 System.out.println(
                         id + " | " +
-                        name + " | " +
-                        email + " | Department: " +
-                        deptId
+                        name + " | Age: " +
+                        age
                 );
             }
 
         } finally {
 
-            // Close ResultSet
             if (resultSet != null) {
-
                 resultSet.close();
             }
 
-            // Close PreparedStatement
             if (statement != null) {
-
                 statement.close();
             }
         }
@@ -228,7 +213,7 @@ public class Main {
 
         String sql =
                 "UPDATE students " +
-                "SET name = ?, email = ? " +
+                "SET name = ?, age = ? " +
                 "WHERE id = ?";
 
         PreparedStatement statement = null;
@@ -237,16 +222,8 @@ public class Main {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(
-                    1,
-                    "Rahul Sharma"
-            );
-
-            statement.setString(
-                    2,
-                    "rahul.sharma@gmail.com"
-            );
-
+            statement.setString(1, "Sobia Khan");
+            statement.setInt(2, 22);
             statement.setInt(3, 11);
 
             int rows = statement.executeUpdate();
@@ -257,9 +234,7 @@ public class Main {
 
         } finally {
 
-            // Close PreparedStatement
             if (statement != null) {
-
                 statement.close();
             }
         }
@@ -293,9 +268,7 @@ public class Main {
 
         } finally {
 
-            // Close PreparedStatement
             if (statement != null) {
-
                 statement.close();
             }
         }
