@@ -1,0 +1,12 @@
+Java is a powerful programming language.
+File handling is an important Java concept.
+FileReader is used to read characters.
+BufferedReader is used to read lines.
+Java provides many useful classes.
+Programming improves problem solving skills.
+Practice helps us understand concepts.
+Files can store important information.
+Reading files is easy with Java.
+We are learning exception handling.
+This is Week 3 of our internship.
+File handling is useful in real applications.
